@@ -7,7 +7,7 @@ const ArtistList = (props) => {
   const [artists, setArtists] = useState(null);
   const [selectedArtist, setSelectedArtist] = useState(null);
   let search = props.search;
-  let query = `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${search}&api_key=2a740d97172bba9499d0789532949e0a&format=json`;
+  let query = `https://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${search}&api_key=${process.env.REACT_APP_LASTFM}&format=json`;
 
   useEffect(() => {
     async function fetchData() {

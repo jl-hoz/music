@@ -5,7 +5,7 @@ const Album = (props) => {
 
   const [album, setAlbum] = useState(null);
   let selalbum  = props.album;
-  let query = `https://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=2a740d97172bba9499d0789532949e0a&artist=${selalbum?.artist}&album=${selalbum?.name}&format=json`;
+  let query = `https://ws.audioscrobbler.com/2.0/?method=album.getInfo&api_key=${process.env.REACT_APP_LASTFM}&artist=${selalbum?.artist}&album=${selalbum?.name}&format=json`;
 
   useEffect(() => {
     async function fetchData() {

@@ -7,9 +7,9 @@ const Artist = (props) => {
   const [topAlbums, setTopAlbums] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
   let selartist  = props.artist;
-  let query = `https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&api_key=2a740d97172bba9499d0789532949e0a&artist=${selartist?.name}&format=json`;
-  let queryTopAlbums = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&api_key=2a740d97172bba9499d0789532949e0a&artist=${selartist?.name}&format=json`;
-  let queryTopSongs = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&api_key=2a740d97172bba9499d0789532949e0a&artist=${selartist?.name}&format=json`;
+  let query = `https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&api_key=${process.env.REACT_APP_LASTFM}&artist=${selartist?.name}&format=json`;
+  let queryTopAlbums = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopAlbums&api_key=${process.env.REACT_APP_LASTFM}&artist=${selartist?.name}&format=json`;
+  let queryTopSongs = `https://ws.audioscrobbler.com/2.0/?method=artist.getTopTracks&api_key=${process.env.REACT_APP_LASTFM}&artist=${selartist?.name}&format=json`;
 
   useEffect(() => {
     async function fetchData() {

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import SongList from "./Components/SongList";
 import AlbumList from "./Components/AlbumList";
 import ArtistList from "./Components/ArtistList";
-//import { useAxios } from "./use-axios";
 
 const App = () => {
 
@@ -62,7 +61,7 @@ const App = () => {
         <button>Submit</button>
       </form>
 
-      
+
       {isSong && setFirstSearch ? <SongList search={search} /> : null}
       {isAlbum && setFirstSearch ? <AlbumList search={search}/> : null}
       {isArtist && setFirstSearch ? <ArtistList search={search} /> : null}
