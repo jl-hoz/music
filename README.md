@@ -1,6 +1,6 @@
 # What is this?
 
-This is a react application that can search for songs, albums or artists. The results will be paged every 20 results. If you click in any result you will have a deep view of the element, no matter is an artist, song or album.
+This is a react application that can search for songs, albums or artists. The results will be paged every 20 results. If you click in any result you will have a deep view of the element, no matter is an artist, song or album. It uses css flex-box for a better UI.
 
 # Configuration file: .env
 
