@@ -6,6 +6,7 @@ const Song = (props) => {
   const [song, setSong] = useState(null);
   let selsong  = props.song;
   let query = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${process.env.REACT_APP_LASTFM}&artist=${selsong?.artist}&track=${selsong?.name}&format=json`;
+  let querySongLyrics = `https://api.genius.com/search?q=${selsong.name}`;
 
   useEffect(() => {
     async function fetchData() {
@@ -15,12 +16,44 @@ const Song = (props) => {
         setSong(data.track);
       }
     }
+    async function fetchLyrics() {
+      const config = {
+        headers: { Authorization: `Bearer ${process.env.REACT_APP_GENIUS}` }
+      };
+
+      const bodyParameters = {
+        key: "value"
+      };
+
+      axios.post(
+        querySongLyrics,
+        bodyParameters,
+        config
+      ).then(console.log).catch(console.log);
+    }
     fetchData();
   }, [selsong]);
 
+  let data;
+
+  if (song) {
+    let image = song.album.image.find(image => image.size === "extralarge");
+    data = <div>
+      <h2>{song.name}</h2>
+      <p>{song.album.title}</p>
+      <p>{song.artist.name}</p>
+      <p>{Math.trunc(song.duration / 60000)}min {song.duration % 60}s</p>
+      <img src={image["#text"]} alt="album cover not available in last.fm" />
+      <p>Data adden in: {song.wiki?.published}</p>
+      <p>{song.wiki?.summary}</p>
+      <h2>Lyrics</h2>
+      <p>Genius lyrics not available because of CORS policy :(</p>
+    </div>
+  }
+
   return (
     <div>
-      {song && selsong? <p>Song: {song.name} / Artist: {song.artist.name} / Album: {song.album.title}</p> : null}
+      {song && selsong ? data : null}
     </div>
   );
 }
