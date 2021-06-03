@@ -40,17 +40,29 @@ const Artist = (props) => {
 
   let data;
   if (artist) {
-    data = <div>
-      <h2>{artist.name}</h2>
-      <p>Tags: {artist.tags.tag.map(tag => <span>{tag.name} </span>)}</p>
-      <h3>Top Album</h3>
-      {topAlbums.length > 5 ? topAlbums.slice(0, 5).map(album => <p>{album.name}</p>) : topAlbums.map(album => <p>{album.name}</p>)}
-      <h3>Top Songs</h3>
-      {topSongs.length > 5 ? topSongs.slice(0, 5).map(song => <p>{song.name}</p>) : topSongs.map(song => <p>{song.name}</p>)}
-      <h3>Similar artists</h3>
-      {artist.similar.artist.map(artist => <p>{artist.name}</p>)}
-      <h3>Biography</h3>
-      <p>{artist.bio.summary}</p>
+    data = <div className="artist">
+      <div className="artist-header">
+        <h1>{artist.name}</h1>
+        <p>Tags: {artist.tags.tag.map(tag => <span>{tag.name} </span>)}</p>
+      </div>
+      <div className="artist-top">
+        <div className="artist-topAlbum">
+          <h3>Top Album</h3>
+          {topAlbums.length > 5 ? topAlbums.slice(0, 5).map(album => <p>{album.name}</p>) : topAlbums.map(album => <p>{album.name}</p>)}
+        </div>
+        <div className="artist-topSong">
+          <h3>Top Songs</h3>
+          {topSongs.length > 5 ? topSongs.slice(0, 5).map(song => <p>{song.name}</p>) : topSongs.map(song => <p>{song.name}</p>)}
+        </div>
+      </div>
+      <div className="artist-misc-similar">
+        <h3>Similar artists</h3>
+        <p>{artist.similar.artist.map(artist => <span>{artist.name} | </span>)}</p>
+      </div>
+      <div className="artist-misc-bio">
+        <h3>Biography</h3>
+        <p>{artist.bio.summary}</p>
+      </div>
     </div>;
   }
 

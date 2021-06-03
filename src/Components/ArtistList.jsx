@@ -32,11 +32,11 @@ const ArtistList = (props) => {
 
 
   return (
-    <div>
+    <div className={selectedArtist === null ? "list" : ""}>
       {artists !== undefined && artists && selectedArtist === null ? currentSongs.map(artist => {
         return <p key={artist.url}><a style={{ color: "blue" }} onClick={() => setSelectedArtist(artist)}>{artist.name}</a> {artist.artist}</p>;
       }) : null}
-      {artists !== undefined && artists && currentSongs ? <Pagination
+      {artists !== undefined && artists && currentSongs && selectedArtist === null ? <Pagination
         postsPerPage={songsPerPage}
         totalPosts={artists.length}
         paginate={paginate}

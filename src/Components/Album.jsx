@@ -22,15 +22,22 @@ const Album = (props) => {
 
   if(album){
     let image = album.image.find(image => image.size === "extralarge");
-    data = <div>
-      <img src={image["#text"]} alt="album cover not available in last.fm" />
-      <h2>{album.name}</h2>
-      <p>{album.artist}</p>
-      <p>Data adden in: {album.wiki?.published}</p>
-      <p>{album.wiki?.summary}</p>
-      <ol>
-        {album.tracks.track.map(song => <li>{song.name} / {Math.trunc(song.duration / 60)}min {song.duration % 60}s</li>)}
-      </ol>
+    data = <div className="album">
+      <div className="album-header">
+        <img src={image["#text"]} alt="album cover not available in last.fm" />
+        <div>
+          <h2>{album.name}</h2>
+          <p>{album.artist}</p>
+          <p>Data adden in: {album.wiki?.published}</p>
+        </div>
+      </div>
+      <div className="album-data">
+        <h3>Description</h3>
+        <p>{album.wiki?.summary}</p>
+        <ol>
+          {album.tracks.track.map(song => <li><span>{song.name}</span> <span>{Math.trunc(song.duration / 60)}min {song.duration % 60}s</span></li>)}
+        </ol>
+      </div>
     </div>
   }
 

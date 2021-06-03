@@ -39,15 +39,23 @@ const Song = (props) => {
   if (song) {
     let image = song.album?.image.find(image => image.size === "extralarge");
     data = <div>
-      <h2>{song.name}</h2>
-      <p>{song.album?.title}</p>
-      <p>{song.artist.name}</p>
-      <p>{Math.trunc(song.duration / 60000)}min {song.duration % 60}s</p>
-             {song.album ? <img src={image["#text"]} alt="album cover not available in last.fm" /> : null}
-      <p>Data adden in: {song.wiki?.published}</p>
-      <p>{song.wiki?.summary}</p>
-      <h2>Lyrics</h2>
-      <p>Genius lyrics not available because of CORS policy :(</p>
+      <div className="song">
+        <div className="song-header">
+          <div>
+            <h2>{song.name}</h2>
+            <p>{song.album?.title}</p>
+            <p>{song.artist.name}</p>
+            <p>{Math.trunc(song.duration / 60000)}min {song.duration % 60}s</p>
+            <p>Data adden in: {song.wiki?.published}</p>
+          </div>
+          {song.album ? <img src={image["#text"]} alt="album cover not available in last.fm" /> : null}
+        </div>
+        <div className="song-data">
+          <p>{song.wiki?.summary}</p>
+          <h2>Lyrics</h2>
+          <p>Genius lyrics not available because of CORS policy :(</p>
+        </div>
+      </div>
     </div>
   }
 

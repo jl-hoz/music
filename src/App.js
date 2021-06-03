@@ -46,24 +46,28 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={submitForm}>
-        <input type="text" name="searchbar" value={searchBuffer} onChange={updateSearch} placeholder="Search songs, albums or artists..." />
+      <div className="header">
+        <h1>Music Brain</h1>
+        <form onSubmit={submitForm}>
+          <input type="text" name="searchbar" value={searchBuffer} onChange={updateSearch} placeholder="Search songs, albums or artists..." />
 
-        <input type="radio" name="searchtag" checked={isSong} onChange={() => updateSongTag()} />
-        <label>Song</label>
+          <input type="radio" name="searchtag" checked={isSong} onChange={() => updateSongTag()} />
+          <label>Song</label>
 
-        <input type="radio" name="searchtag" checked={isAlbum} onChange={() => updateAlbumTag()} />
-        <label>Album</label>
+          <input type="radio" name="searchtag" checked={isAlbum} onChange={() => updateAlbumTag()} />
+          <label>Album</label>
 
-        <input type="radio" name="searchtag" checked={isArtist} onChange={() => updateArtistTag()} />
-        <label>Artist</label>
+          <input type="radio" name="searchtag" checked={isArtist} onChange={() => updateArtistTag()} />
+          <label>Artist</label>
 
-        <button>Submit</button>
-      </form>
+          <button>Submit</button>
+        </form>
+      </div>
+
 
 
       {isSong && setFirstSearch ? <SongList search={search} /> : null}
-      {isAlbum && setFirstSearch ? <AlbumList search={search}/> : null}
+      {isAlbum && setFirstSearch ? <AlbumList search={search} /> : null}
       {isArtist && setFirstSearch ? <ArtistList search={search} /> : null}
 
       {console.log(data)}
