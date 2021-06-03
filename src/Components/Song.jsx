@@ -37,13 +37,13 @@ const Song = (props) => {
   let data;
 
   if (song) {
-    let image = song.album.image.find(image => image.size === "extralarge");
+    let image = song.album?.image.find(image => image.size === "extralarge");
     data = <div>
       <h2>{song.name}</h2>
-      <p>{song.album.title}</p>
+      <p>{song.album?.title}</p>
       <p>{song.artist.name}</p>
       <p>{Math.trunc(song.duration / 60000)}min {song.duration % 60}s</p>
-      <img src={image["#text"]} alt="album cover not available in last.fm" />
+             {song.album ? <img src={image["#text"]} alt="album cover not available in last.fm" /> : null}
       <p>Data adden in: {song.wiki?.published}</p>
       <p>{song.wiki?.summary}</p>
       <h2>Lyrics</h2>
