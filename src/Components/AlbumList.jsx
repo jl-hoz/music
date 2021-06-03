@@ -23,7 +23,7 @@ const AlbumList = (props) => {
 
   return (
     <div>
-    { albums !== undefined && albums ? albums.map(album => {
+    { albums !== undefined && albums && selectedAlbum === null? albums.map(album => {
       return <p key={album.url}><a style={{color: "blue"}} onClick={() => setSelectedAlbum(album)}>{album.name}</a> {album.artist}</p>;
     }) : null}
       {selectedAlbum !== null ? <Album album={selectedAlbum}/> : null}
