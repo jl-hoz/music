@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Artist from "./Artist";
+import Pagination from "./Pagination";
 
 const ArtistList = (props) => {
 
@@ -14,20 +15,36 @@ const ArtistList = (props) => {
       const { data } = await axios.get(query);
       //setData(data);
       console.log(data)
-      if(data.results){
+      if (data.results) {
         setArtists(data.results.artistmatches.artist);
       }
     }
     fetchData();
   }, [search]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [songsPerPage, setSongsPerPage] = useState(20);
+  const indexOfLastSong = currentPage * songsPerPage;
+  const indexOfFirstSong = indexOfLastSong - songsPerPage;
+  const currentSongs = artists?.slice(indexOfFirstSong, indexOfLastSong);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+
   return (
     <div>
-    { artists !== undefined && artists && selectedArtist === null ? artists.map(artist => {
-      return <p key={artist.url}><a style={{color: "blue"}} onClick={() => setSelectedArtist(artist)}>{artist.name}</a> {artist.artist}</p>;
-    }) : null}
-      {selectedArtist !== null ? <Artist artist={selectedArtist}/> : null}
-      {console.log(selectedArtist) }
+      {artists !== undefined && artists && selectedArtist === null ? currentSongs.map(artist => {
+        return <p key={artist.url}><a style={{ color: "blue" }} onClick={() => setSelectedArtist(artist)}>{artist.name}</a> {artist.artist}</p>;
+      }) : null}
+      {artists !== undefined && artists && currentSongs ? <Pagination
+        postsPerPage={songsPerPage}
+        totalPosts={artists.length}
+        paginate={paginate}
+      /> : null}
+
+
+      {selectedArtist !== null ? <Artist artist={selectedArtist} /> : null}
+      {console.log(selectedArtist)}
     </div>
   );
 }

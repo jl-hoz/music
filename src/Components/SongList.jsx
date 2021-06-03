@@ -16,7 +16,7 @@ const SongList = (props) => {
       const { data } = await axios.get(query);
       //setData(data);
       console.log(data)
-      if(data.results){
+      if (data.results) {
         setSongs(data.results.trackmatches.track);
       }
     }
@@ -32,17 +32,17 @@ const SongList = (props) => {
 
   return (
     <div>
-    { songs !== undefined && songs && currentSongs? currentSongs.map(song => {
-      return <p key={song.url}><a style={{color: "blue"}} onClick={() => setSelectedSong(song)}>{song.name}</a> {song.artist}</p>;
-    }) : null}
-      {console.log(selectedSong) }
-      {songs !== undefined && songs && currentSongs? <Pagination
+      {songs !== undefined && songs && currentSongs ? currentSongs.map(song => {
+        return <p key={song.url}><a style={{ color: "blue" }} onClick={() => setSelectedSong(song)}>{song.name}</a> {song.artist}</p>;
+      }) : null}
+      {console.log(selectedSong)}
+      {songs !== undefined && songs && currentSongs ? <Pagination
         postsPerPage={songsPerPage}
         totalPosts={songs.length}
         paginate={paginate}
-       /> : null}
+      /> : null}
 
-      {selectedSong !== null ? <Song song={selectedSong}/> : null}
+      {selectedSong !== null ? <Song song={selectedSong} /> : null}
     </div>
   );
 }

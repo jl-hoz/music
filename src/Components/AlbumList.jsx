@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Album from "./Album";
+import Pagination from "./Pagination";
 
 const AlbumList = (props) => {
 
@@ -14,20 +15,37 @@ const AlbumList = (props) => {
       const { data } = await axios.get(query);
       //setData(data);
       console.log(data)
-      if(data.results){
+      if (data.results) {
         setAlbums(data.results.albummatches.album);
       }
     }
     fetchData();
   }, [search]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [songsPerPage, setSongsPerPage] = useState(20);
+  const indexOfLastSong = currentPage * songsPerPage;
+  const indexOfFirstSong = indexOfLastSong - songsPerPage;
+  const currentSongs = albums?.slice(indexOfFirstSong, indexOfLastSong);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
+
   return (
     <div>
-    { albums !== undefined && albums && selectedAlbum === null? albums.map(album => {
-      return <p key={album.url}><a style={{color: "blue"}} onClick={() => setSelectedAlbum(album)}>{album.name}</a> {album.artist}</p>;
-    }) : null}
-      {selectedAlbum !== null ? <Album album={selectedAlbum}/> : null}
-      {console.log(selectedAlbum) }
+      {albums !== undefined && albums && selectedAlbum === null ? currentSongs.map(album => {
+        return <p key={album.url}><a style={{ color: "blue" }} onClick={() => setSelectedAlbum(album)}>{album.name}</a> {album.artist}</p>;
+      }) : null}
+      {albums !== undefined && albums && currentSongs ? <Pagination
+        postsPerPage={songsPerPage}
+        totalPosts={albums.length}
+        paginate={paginate}
+      /> : null}
+
+
+
+      {selectedAlbum !== null ? <Album album={selectedAlbum} /> : null}
+      {console.log(selectedAlbum)}
     </div>
   );
 }
